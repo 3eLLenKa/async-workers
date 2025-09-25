@@ -1,0 +1,46 @@
+# Binaries
+/bin/
+/build/
+/dist/
+/out/
+
+# Go files
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+
+# Go workspace file
+go.work
+go.work.sum
+
+# Dependency directories (vendor/)
+vendor/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.*
+
+# Database files (if using SQLite locally for tests)
+*.db
+*.sqlite
+
+# Coverage files
+coverage.out
+
+# Docker
+docker-compose.override.yml
