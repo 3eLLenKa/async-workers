@@ -44,3 +44,5 @@ coverage.out
 
 # Docker
 docker-compose.override.yml
+
+.DS_Store
