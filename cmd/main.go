@@ -45,19 +45,19 @@ func TaskWorker(ctx context.Context, log *slog.Logger, n int, tasks <-chan *mode
 			for {
 				attempt++ // считаем попытку
 
-				// симуляция работы 100–500 мс
-				workTime := rand.Intn(400) + 100
+				workTime := rand.Intn(400) + 100 // симуляция работы 100–500 мс
 				time.Sleep(time.Duration(workTime) * time.Millisecond)
 
-				// задача падает с вероятностью 20%
-				if rand.Float32() < 0.2 {
+				if rand.Float32() < 0.2 { // задача падает с вероятностью 20%
 					if attempt > task.MaxRetries {
 						task.Status = statusFailed
+
 						log.Error("Task failed",
 							"worker", n,
 							"id", task.Id,
 							"attempts", attempt,
 						)
+
 						break
 					}
 
@@ -88,6 +88,7 @@ func TaskWorker(ctx context.Context, log *slog.Logger, n int, tasks <-chan *mode
 
 				// успех
 				task.Status = statusDone
+
 				log.Info("Task completed successfully",
 					"worker", n,
 					"id", task.Id,

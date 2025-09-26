@@ -7,17 +7,17 @@ import (
 	"workers/internal/queue"
 )
 
-type Worker interface {
+type Queue interface {
 	Enqueue(id, payload string, maxRetries int) error
 }
 
 type Handlers struct {
-	worker Worker
+	queue Queue
 }
 
-func New(worker Worker) *Handlers {
+func New(queue Queue) *Handlers {
 	return &Handlers{
-		worker: worker,
+		queue: queue,
 	}
 }
 
@@ -38,7 +38,7 @@ func (h *Handlers) EnqueueHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := h.worker.Enqueue(req.Id, req.Payload, req.MaxRetries); err != nil {
+	if err := h.queue.Enqueue(req.Id, req.Payload, req.MaxRetries); err != nil {
 		if errors.Is(err, queue.ErrQueueIsFull) {
 			http.Error(w, err.Error(), http.StatusTooManyRequests)
 			return
