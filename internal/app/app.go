@@ -17,9 +17,9 @@ func New(
 ) *App {
 	handlers := handlers.New(q)
 	router := router.New(handlers).InitRouter()
-	app := server.New(serverAddr, router)
+	server := server.New(serverAddr, router)
 
 	return &App{
-		Server: app,
+		Server: server,
 	}
 }
